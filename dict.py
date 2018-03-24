@@ -1,8 +1,8 @@
 
 import csv
+from dictionaryDt import dictionary
 
-
-dictt = {'Name':'Abdul'}
+theDict = dictionary("theDict")
 
 with open('dictionary/dictionary.csv', 'rb') as csvfile:		#Opening up dictionary
 	read = csv.reader(csvfile, delimiter=',', quotechar='|')
@@ -15,7 +15,5 @@ with open('dictionary/dictionary.csv', 'rb') as csvfile:		#Opening up dictionary
 		row.pop(0)
 		element = "".join(row)
 		element = element.replace("\"","")
-		dictt[key] = element
-
-print(dictt['"a"'])
-		
+		theDict.put(key,element)
+		count += 1
