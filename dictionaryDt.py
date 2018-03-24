@@ -6,8 +6,17 @@ class dictionary(object):
 		self.name = name
 		self.wordsList = []
 		self.words = []
+
 	def put(self, key, e):
 		self.words.append(element(key,e))
-	#def get(key):
 
-	#def remove(key):
+	def get(self,key):
+		for word in self.words:
+			if word.key() == key:
+				print("MATCH FOUND")
+
+	def remove(self, key):
+		for i in range(0,len(self.words)):
+			if self.words[i].key() == key:
+				self.words.pop(i)
+				print("removed")
