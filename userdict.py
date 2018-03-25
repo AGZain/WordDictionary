@@ -1,5 +1,4 @@
 from dictionaryDt import dictionary
-import sys
 
 theDict = dictionary("theDict")
 
@@ -10,5 +9,8 @@ print ('Enter "s" to search for a word')
 response = input("Please enter a letter ")
 print(response)
 
+if response=="n":
 
+if response=="e":
 
+if response=="s":
