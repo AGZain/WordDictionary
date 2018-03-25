@@ -11,12 +11,23 @@ class dictionary(object):
 		self.words.append(element(key,e))
 
 	def get(self,key):
-		for word in self.words:
-			if word.key() == key:
-				print("MATCH FOUND")
+		found = False
+		results = []
+		for i in range(0,len(self.words)):
+			if self.words[i].key() == key:
+				found = True
+				results.append([i, words[i].gete])
+		return results
 
 	def remove(self, key):
 		for i in range(0,len(self.words)):
 			if self.words[i].key() == key:
 				self.words.pop(i)
 				print("removed")
+
+	def update(self, key, e):
+		found = False
+		for i in range(0,len(self.words)):
+			if self.words[i].key() == key:
+				self.words[i].sete(e)
+				found = True

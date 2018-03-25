@@ -5,5 +5,11 @@ class element(object):
         self.k = k
         self.e = e
 
-    def update(self, e):
+    def sete(self, e):
         self.e = e
+
+    def key(self):
+        return self.k
+
+    def gete(self):
+        return self.e
