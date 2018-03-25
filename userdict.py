@@ -11,6 +11,8 @@ print(response)
 
 if response=="n":
 
-if response=="e":
+else if response=="e":
 
-if response=="s":
+else if response=="s":
+  
+  
