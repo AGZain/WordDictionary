@@ -1,6 +1,7 @@
 
 class element(object):
-
+    k = ""
+    e = ""
     def __init__(self, k, e):
         self.k = k
         self.e = e

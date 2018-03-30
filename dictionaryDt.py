@@ -1,14 +1,17 @@
 from elementDt import element
 
 class dictionary(object):
-
+	name = ""
+	wordsList = []
+	words = []
 	def __init__(self, name):
 		self.name = name
-		self.wordsList = []
-		self.words = []
+
 
 	def put(self, key, e):
-		self.words.append(element(key,e))
+		newWord = element(key,e)
+		self.words.append(newWord)
+		
 
 	def get(self,key):
 		found = False
@@ -16,18 +19,20 @@ class dictionary(object):
 		for i in range(0,len(self.words)):
 			if self.words[i].key() == key:
 				found = True
-				results.append([i, words[i].gete])
+				res = self.words[i].gete()
+				results.append([i, res])
 		return results
 
 	def remove(self, key):
 		for i in range(0,len(self.words)):
 			if self.words[i].key() == key:
 				self.words.pop(i)
-				print("removed")
+				print("Removed")
 
 	def update(self, key, e):
 		found = False
 		for i in range(0,len(self.words)):
 			if self.words[i].key() == key:
 				self.words[i].sete(e)
+				print("Updated")
 				found = True

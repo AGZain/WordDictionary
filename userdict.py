@@ -1,30 +1,50 @@
 from dictionaryDt import dictionary
+import csv
 
 theDict = dictionary("theDict")
 
-var = 1
-while var == 1 :
+with open('dictionary/dictionary.csv', 'r', encoding='utf8',errors='ignore') as csvfile:		#Opening up dictionary
+    read = csv.reader(csvfile, delimiter=',', quotechar='|')
+    for row in read:						#Looping through each line in the csv
+        key = row[0]
+        row.pop(0)
+        element = "".join(row)
+        element = element.replace("\"","")
+        key = key.replace("\"","")
+        theDict.put(key,element)
+def home(response):
 
+    if response[0] == "n":
+        word = input("Please enter a word: ")
+        definition = input("Please enter a definition: ")
+        theDict.put(word,definition)
+        print("Definition Added")
+        new()
+
+    elif response[0] == "e":
+        word= input("Enter word to change definition: ")
+        definition= input("Enter new definition: ")
+        theDict.update(word,definition)
+        new()
+
+    elif response[0] == "s":
+        word=input("Enter word to search: ")
+        print("")
+        result=theDict.get(word)
+        for i in range(0,len(result)):
+            print(result[i][1]);
+        if len(result) == 0:
+            print("SORRY... no results found")
+        print("")
+        new()
+
+def new():
+    response = ["words"]
     print("Welcome to the dictionary!")
     print('Enter "n" to enter new word/definition ')
     print('Enter "e" to edit a definition ')
     print ('Enter "s" to search for a word ')
-    response = input("Please enter a letter ")
-    print(response)
+    response[0] = input("Please enter a letter: ")
+    home(response)
 
-    if response=="n":
-      word = input("Please enter a word")
-      definition = input("Please enter a definition")
-      theDict.put(word,definition)
-        
-    elif response=="e":
-      word= input("Enter word to change definition")
-      definition= input("Enter new definition")
-      theDict.update(word,definition)
-
-    elif response=="s":
-      word=input("Enter word to search")
-      result=theDict.get(word)
-      for i in range(0,len(result)):
-          print(result[i]);
-
+new()
