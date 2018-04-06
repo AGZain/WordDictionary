@@ -1,8 +1,9 @@
 import csv
 from dictionaryDt import dictionary
+import time
 
 
-def addDict(n, theDict):
+def addDict(n, theDict):            #getting words from the dictionary
     with open('dictionary/dictionary.csv', 'r', encoding='utf8',errors='ignore') as csvfile:		#Opening up dictionary
         read = csv.reader(csvfile, delimiter=',', quotechar='|')
         count = 0
@@ -24,7 +25,7 @@ def addDict(n, theDict):
             theDict.put(key,element)
 
 
-def addDef(n, theDict):
+def addDef(n, theDict):                 #Adding definations to the dictionary
     with open('dictionary/definitions.csv', 'r', encoding='utf8',errors='ignore') as csvfile:		#Opening up dictionary
         read = csv.reader(csvfile, delimiter=',', quotechar='|')
         count = 0
@@ -42,7 +43,7 @@ def addDef(n, theDict):
                 count += 1
             if count == 100:
                 break
-def searchTxt(n, theDict):
+def searchTxt(n, theDict):                  #Searching for words in the dictionary
     with open('dictionary/words.txt') as wordFile:
         words = wordFile.readlines()
         if n == -1:
@@ -55,7 +56,7 @@ def searchTxt(n, theDict):
                 print(result[i][1]);
                 print("")
 
-def removeWords(n, theDict):
+def removeWords(n, theDict):            #Removing words from the dictionary
     with open('dictionary/words.txt') as wordFile:
         words = wordFile.readlines()
         if n == -1:
@@ -66,17 +67,18 @@ def removeWords(n, theDict):
 
 
 
-def exercise(n):
+def exercise(n):                #calling each function
     theDict = dictionary("theDict")
     addDict(n,theDict)
     addDef(n, theDict)
     searchTxt(n, theDict)
     removeWords(n, theDict)
 
-
+start_time = time.time()
 exercise(100)
 exercise(1000)
 exercise(2500)
 exercise(5000)
 exercise(10000)
-#exercise(-1)
+exercise(-1)
+print("--- %s seconds ---" % (time.time() - start_time))

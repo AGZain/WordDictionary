@@ -2,7 +2,7 @@ from dictionaryDt import dictionary
 import csv
 
 theDict = dictionary("theDict")
-
+#Adding all the words
 with open('dictionary/dictionary.csv', 'r', encoding='utf8',errors='ignore') as csvfile:		#Opening up dictionary
     read = csv.reader(csvfile, delimiter=',', quotechar='|')
     count = 0
@@ -13,25 +13,25 @@ with open('dictionary/dictionary.csv', 'r', encoding='utf8',errors='ignore') as 
         element = element.replace("\"","")
         key = key.replace("\"","")
         theDict.put(key,element)
-        count += 1
-        if count == 100:
-            break
-def home(response):
+        # count += 1
+        # if count == 150:
+        #     break
 
-    if response[0] == "n":
+def home(response):             #Main
+    if response[0] == "n":              #Adding new word
         word = input("Please enter a word: ")
         definition = input("Please enter a definition: ")
         theDict.put(word,definition)
         print("Definition Added")
         new()
 
-    elif response[0] == "e":
+    elif response[0] == "e":            #Change
         word= input("Enter word to change definition: ")
         definition= input("Enter new definition: ")
         theDict.update(word,definition)
         new()
 
-    elif response[0] == "s":
+    elif response[0] == "s":               #Searching
         word=input("Enter word to search: ")
         print("")
         result=theDict.get(word)
@@ -43,14 +43,18 @@ def home(response):
         print("")
         new()
 
-    elif response[0] == "r":
-            word=input("Enter word to remove: ")
-            print("")
-            theDict.remove(word)
-            print("")
-            new()
+    elif response[0] == "r":            #Removing
+        word=input("Enter word to remove: ")
+        print("")
+        theDict.remove(word)
+        print("")
+        new()
+    else:
+        print("Invalid input. Please Try again: ")
+        print("")
+        new()
 
-def new():
+def new():                          #Start
     response = ["words"]
     print("Welcome to the dictionary!")
     print('Enter "n" to enter new word/definition ')

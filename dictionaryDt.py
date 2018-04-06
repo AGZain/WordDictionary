@@ -1,44 +1,38 @@
 from elementDt import element
 import math
-
+#Dictionary object
 class dictionary(object):
     name = ""
-    wordsList = []
-    words = []
+    words = []                      #Array of element objects
 
     def __init__(self, name):
         self.name = name
 
-    def put(self, key, e):
+    def put(self, key, e):          #Adding a new word
         newWord = element(key,e)
-
+        #If list is empty
         if len(self.words) == 0 or key < self.words[0].key():
             self.words.insert(0,newWord)
-            print("adding")
         elif len(self.words) == 1 and key > self.words[0].key():
             self.words.insert(1,newWord)
-        else:
+        else:       #Finding correct location to put in the new word
             for i in range(0,len(self.words)-1):
                 if self.words[i].key() <= key and self.words[i+1].key() >= key:
                     self.words.insert(i+1,newWord)
-                    print(self.words[i+1].key())
                     break
 
                 elif(i == len(self.words)-2):
                     self.words.append(newWord)
-                    print(self.words[i+1].key())
-        #self.words.append(newWord)
+        print(key + " has been added")
 
-
-    def get(self,key):
-
+    def get(self,key):              #Searching for a word
         found = False
         results = []
         f = 0
         l = len(self.words)-1
         found = False
         num = 0
-        while f < l:
+        while f < l:                   #Binary Search
             num = math.trunc((f + l)/2)
             if self.words[num].key() < key:
                 f = math.ceil((f + l)/2)
@@ -53,23 +47,17 @@ class dictionary(object):
         found = False
         i = 1
         while found == False:
-            # print("Foirst: " + str(len(self.words) > num + i) + "also " + str(self.words[num + i].key() == key) + "word is " + self.words[num + i].key())
-            # print("search: " + str(-1 < num-i) + "also " +str(self.words[num - i].key() == key) + "word is: " + self.words[num - i].key())
             if ((len(self.words) > num + i and self.words[num + i].key() == key) or (-1 < num-i and self.words[num - i].key() == key)):
                 if len(self.words) > num + i and self.words[num + i].key() == key:
-                    # if self.words[num + i].key() == key:
                     results.append([num + i,self.words[num+i].gete()])
                 if -1 < num-i and self.words[num - i].key() == key:
-                    #if self.words[num  - i].key() == key:
                     results.append([num - i,self.words[num-i].gete()])
             else:
-
                 found = True
             i += 1
+        return results              #Return list of definations
 
-        return results
-
-    def remove(self, key):
+    def remove(self, key):          #Removing a word
         results = self.get(key)
         leng = len(results)
         i = 0
@@ -78,15 +66,14 @@ class dictionary(object):
             self.words.pop(i)
             leng -= 1
             i += 1
-        #for i in range(0,len(results)):
 
 
-    def update(self, key, e):
+    def update(self, key, e):           #Updating the defination of a word
         results = self.get(key)
         if len(results) != 0:
             print(self.words[results[0][0]].key() + "  has been updated")
             self.words[0].sete(e)
-            return(True)
+            return(True)                #if word is found
         else:
-            #print("Word not found.")
+            print("Word not found.")
             return(False)
